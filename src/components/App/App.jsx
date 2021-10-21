@@ -1,29 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import { weatherData, initialState } from '../../utils/Weather.js';
+import { getWeatherData, initialState } from '../../utils/Weather.js';
 import Display from '../Display/Display';
+import SearchBar from '../SearchBar/SearchBar';
 
 const App = () => {
   const [currentWeather, setCurrentWeather] = useState(initialState);
   const [isMetric, setIsMetric] = useState(true); // Metric or Imperial Units
+  const [searchedCity, setSearchedCity] = useState('Oslo');
 
   // Fetch the weather data on page load
   useEffect(() => {
-    weatherData().then((response) => {
-      setCurrentWeather(response);
+    getWeatherData(searchedCity).then((response) => {
+      if (response !== undefined) {
+        setCurrentWeather(response);
+      }
     });
-  }, []);
+  }, [searchedCity]);
 
-  const handleIsMetric = () => {
-    return isMetric ? setIsMetric(false) : setIsMetric(true);
+  const handleIsMetric = ({ target }) => {
+    target.value === 'fahrenheit' ? setIsMetric(false) : setIsMetric(true);
+  };
+
+  const handleSubmit = (term) => {
+    setSearchedCity(term);
   };
 
   return (
     <div className='main-container'>
-      <Display currentWeather={currentWeather} isMetric={isMetric} />
-      {/* <button style={{ padding: '10px 20px' }} onClick={handleIsMetric}>
-        Celcius / Fahrenheit
-      </button> */}
+      <SearchBar onSubmit={handleSubmit} />
+      <Display
+        currentWeather={currentWeather}
+        isMetric={isMetric}
+        onClick={handleIsMetric}
+      />
     </div>
   );
 };

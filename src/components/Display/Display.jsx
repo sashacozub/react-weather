@@ -1,7 +1,8 @@
 import React from 'react';
+import './Display.css';
 import { capitalizeString } from '../../utils/helpers.js';
 
-const Display = ({ currentWeather, isMetric }) => {
+const Display = ({ currentWeather, isMetric, onClick }) => {
   // Desctructure the JSON response from weather API
   let {
     name,
@@ -19,23 +20,47 @@ const Display = ({ currentWeather, isMetric }) => {
     feels_like = ((feels_like - 273.15) * 9) / 5 + 32;
   }
 
+  const coldWeatherStyle = {
+    color: 'rgb(99, 189, 241)',
+  };
+
+  const warmWeatherStyle = {
+    color: 'rgb(241, 151, 99)',
+  };
+
   return (
-    <div>
-      <h1>
+    <>
+      <div className='main-weather-info-box'>
+        <img
+          src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
+          alt={`${description} icon`}
+        />
+
+        <div className='temperatures'>
+          <h1 style={temp < 15 ? coldWeatherStyle : warmWeatherStyle}>
+            {temp.toFixed(1)} &#176;{isMetric ? 'C' : 'F'}
+          </h1>
+          <h4>
+            Feels like: {feels_like.toFixed(1)} &#176;{isMetric ? 'C' : 'F'}
+          </h4>
+        </div>
+
+        <div className='temperature-toggle'>
+          <button value='celcius' onClick={onClick}>
+            &#176;C
+          </button>
+          <button value='fahrenheit' onClick={onClick}>
+            &#176;F
+          </button>
+        </div>
+      </div>
+
+      <h3>{capitalizeString(description)}</h3>
+      <h2>
         {name}, {country}
-      </h1>
-      <h2>
-        {temp.toFixed(1)} &#176;{isMetric ? 'C' : 'F'}
       </h2>
-      <h2>
-        {feels_like.toFixed(1)} &#176;{isMetric ? 'C' : 'F'}
-      </h2>
-      <h2>{capitalizeString(description)}</h2>
-      <img
-        src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
-        alt={`${description} icon`}
-      />
-    </div>
+      <hr />
+    </>
   );
 };
 

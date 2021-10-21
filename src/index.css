@@ -18,3 +18,20 @@ body {
     center no-repeat;
   background-size: cover;
 }
+
+h1 {
+  font-size: 4rem;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 3rem;
+}
+
+h3 {
+  font-weight: 400;
+}
+
+h4 {
+  font-weight: 200;
+}
