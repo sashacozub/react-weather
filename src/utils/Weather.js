@@ -15,7 +15,7 @@ export const weatherData = async () => {
 };
 
 export const initialState = {
-  name: 'Loading...',
+  name: '---',
   main: {
     temp: '---',
     feels_like: '---',
@@ -25,7 +25,7 @@ export const initialState = {
   },
   weather: [
     {
-      description: 'Loading...',
+      description: '---',
       icon: '01d',
     },
   ],
