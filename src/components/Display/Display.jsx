@@ -37,7 +37,7 @@ const Display = ({ currentWeather, isMetric, onClick }) => {
         />
 
         <div className='temperatures'>
-          <h1 style={temp < 15 ? coldWeatherStyle : warmWeatherStyle}>
+          <h1>
             {temp.toFixed(1)} &#176;{isMetric ? 'C' : 'F'}
           </h1>
           <h4>
