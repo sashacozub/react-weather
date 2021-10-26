@@ -4,6 +4,8 @@
 
 const axios = require('axios');
 
+const API_KEY = REACT_APP_API_KEY;
+
 export const getCurrentWeather = async (term) => {
   try {
     const response = await axios.get(
