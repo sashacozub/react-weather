@@ -1,5 +1,3 @@
-.forecast-day {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+td {
+  text-align: center;
 }

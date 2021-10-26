@@ -1,5 +1,7 @@
 import { API_KEY } from './apiKey';
 
+// const API_KEY = 'your-api-key';
+
 const axios = require('axios');
 
 export const getCurrentWeather = async (term) => {

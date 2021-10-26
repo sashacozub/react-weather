@@ -13,19 +13,28 @@ const App = () => {
   const [currentWeather, setCurrentWeather] = useState(initialState);
   const [isMetric, setIsMetric] = useState(true); // Metric or Imperial Units
   const [searchedCity, setSearchedCity] = useState('Oslo');
+  const [forecast, setForecast] = useState([]); // Forecast for next 7 days
+  const [isLoading, setIsLoading] = useState(true);
+
+  const faviconLink = document.querySelector("link[rel~='icon']");
 
   // Fetch the weather data on page load
   useEffect(() => {
+    setIsLoading(true);
     getCurrentWeather(searchedCity).then((response) => {
       if (response !== undefined) {
         setCurrentWeather(response);
+        faviconLink.href = `http://openweathermap.org/img/wn/${response.weather[0].icon}.png`;
+        document.title = `${response.name} Weather`;
+
+        // Get daily forecast after the current weather with location coordinates is fetched
+        getDailyWeather(response).then((response) => {
+          setForecast(response);
+          setIsLoading(false);
+        });
       }
-      // Get daily forecast after the current weather with location coordinates is fetched
-      getDailyWeather(response).then((response) => {
-        console.log(response);
-      });
     });
-  }, [searchedCity]);
+  }, [searchedCity, faviconLink]);
 
   const handleIsMetric = ({ target }) => {
     target.value === 'fahrenheit' ? setIsMetric(false) : setIsMetric(true);
@@ -42,8 +51,9 @@ const App = () => {
         currentWeather={currentWeather}
         isMetric={isMetric}
         onClick={handleIsMetric}
+        isLoading={isLoading}
       />
-      <ForecastList />
+      <ForecastList forecast={forecast} isMetric={isMetric} />
     </div>
   );
 };
