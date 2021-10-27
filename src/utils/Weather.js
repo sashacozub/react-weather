@@ -1,10 +1,8 @@
-// import { API_KEY } from './apiKey';
-
-// const API_KEY = 'your-api-key';
+// const API_KEY = 'your-api-key';  // KEEP YOUR API KEY HIDDEN!
 
 const axios = require('axios');
 
-const API_KEY = REACT_APP_API_KEY;
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 export const getCurrentWeather = async (term) => {
   try {
