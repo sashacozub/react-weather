@@ -17,7 +17,7 @@ export const convertTemperature = (temp, isMetric) => {
 };
 
 export const temperatureColors = (temperature) => {
-  if (temperature < 290.15) {
+  if (temperature < 291.15) {
     // Blue color if temperature is lower than 18C / 64.4F
     return { color: 'rgb(99, 189, 241)' };
   } else {
