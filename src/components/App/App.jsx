@@ -29,7 +29,7 @@ const App = () => {
         setCurrentWeather(response);
 
         // Dynamically change website favicon and title
-        faviconLink.href = `http://openweathermap.org/img/wn/${response.weather[0].icon}.png`;
+        faviconLink.href = `https://openweathermap.org/img/wn/${response.weather[0].icon}.png`;
         document.title = `${response.name} Weather`;
 
         // Get daily forecast after the current weather with location coordinates is fetched

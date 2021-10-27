@@ -19,7 +19,7 @@ const ForecastDay = ({ data, isMetric }) => {
     <tr>
       <td>{weekdays[date]}</td>
       <td>
-        <img src={`http://openweathermap.org/img/wn/${icon}.png`} alt={dt} />
+        <img src={`https://openweathermap.org/img/wn/${icon}.png`} alt={dt} />
       </td>
       <td style={temperatureColors(temperature)}>
         {convertTemperature(temperature, isMetric)} &#176;{isMetric ? 'C' : 'F'}
