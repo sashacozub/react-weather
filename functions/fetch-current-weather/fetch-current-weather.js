@@ -16,7 +16,7 @@ const handler = async (event) => {
     const { status, statusText, headers, data } = err.response;
     return {
       statusCode: status,
-      body: JSON.stringifu({ status, statusText, headers, data }),
+      body: JSON.stringify({ status, statusText, headers, data }),
     };
   }
 };
