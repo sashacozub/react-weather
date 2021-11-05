@@ -10,7 +10,7 @@ import SearchBar from '../SearchBar/SearchBar';
 import ForecastList from '../ForecastList/ForecastList';
 
 const App = () => {
-  const [lastFetched, setLastFetched] = useState(undefined);
+  const [lastFetched, setLastFetched] = useState(new Date());
   const [currentWeather, setCurrentWeather] = useState(initialState);
   const [isMetric, setIsMetric] = useState(true); // Metric or Imperial Units
   const [searchedCity, setSearchedCity] = useState('Oslo');
@@ -36,14 +36,13 @@ const App = () => {
         // Get daily forecast after the current weather with location coordinates is fetched
         getDailyWeather(response).then((response) => {
           setForecast(response);
-          setLastFetched(new Date());
           setIsLoading(false);
         });
       } else {
         setIsError(true);
       }
     });
-  }, [searchedCity, faviconLink]);
+  }, [searchedCity, faviconLink, lastFetched]);
 
   const handleIsMetric = ({ target }) => {
     target.value === 'fahrenheit' ? setIsMetric(false) : setIsMetric(true);
@@ -54,8 +53,7 @@ const App = () => {
   };
 
   const handleRefresh = () => {
-    handleSubmit(searchedCity);
-    console.log(searchedCity);
+    setLastFetched(new Date());
   };
 
   return (
