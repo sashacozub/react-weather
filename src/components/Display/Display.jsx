@@ -6,7 +6,15 @@ import {
   temperatureColors,
 } from '../../utils/helpers.js';
 
-const Display = ({ currentWeather, isMetric, onClick, isLoading, isError }) => {
+const Display = ({
+  currentWeather,
+  lastFetched,
+  isMetric,
+  onClick,
+  isLoading,
+  isError,
+  onRefresh,
+}) => {
   // Desctructure the JSON response from weather API
   let {
     name,
@@ -41,10 +49,10 @@ const Display = ({ currentWeather, isMetric, onClick, isLoading, isError }) => {
         </div>
 
         <div className='temperature-toggle'>
-          <button value='celcius' onClick={onClick}>
+          <button className='simple-btn' value='celcius' onClick={onClick}>
             &#176;C
           </button>
-          <button value='fahrenheit' onClick={onClick}>
+          <button className='simple-btn' value='fahrenheit' onClick={onClick}>
             &#176;F
           </button>
         </div>
@@ -54,13 +62,23 @@ const Display = ({ currentWeather, isMetric, onClick, isLoading, isError }) => {
       {isError ? (
         <p>Oops! Seems there was an error...</p>
       ) : (
-        <h2>
+        <div className='last-fetched-box'>
           {isLoading ? (
             <p style={{ fontSize: '2rem' }}>Fetching weather...</p>
           ) : (
-            `${name}, ${country}`
+            <h2>
+              {name}, {country}
+            </h2>
           )}
-        </h2>
+          <div className='last-fetched-display'>
+            <p style={{ fontWeight: '100' }}>
+              Last fetched: {isLoading ? '---' : lastFetched.toLocaleString()}
+            </p>
+            <button className='simple-btn' onClick={onRefresh}>
+              Update now
+            </button>
+          </div>
+        </div>
       )}
       <hr />
     </>

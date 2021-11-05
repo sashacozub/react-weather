@@ -9,10 +9,29 @@
   flex-direction: column;
 }
 
-.temperature-toggle button {
+.simple-btn {
   padding: 10px;
   margin: 2px;
   background-color: rgba(255, 255, 255, 0.9);
   border: none;
   border-radius: 3px;
+  cursor: pointer;
+  transition: all 200ms ease;
+}
+
+.simple-btn:hover {
+  background-color: rgb(241, 151, 99);
+}
+
+.last-fetched-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.last-fetched-display {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
 }

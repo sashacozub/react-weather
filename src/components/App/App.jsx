@@ -1,15 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import {
-  getCurrentWeather,
-  getDailyWeather,
-  initialState,
-} from '../../utils/Weather.js';
+// import {
+//   getCurrentWeather,
+//   getDailyWeather,
+//   initialState,
+// } from '../../utils/Weather.js';
 import Display from '../Display/Display';
 import SearchBar from '../SearchBar/SearchBar';
 import ForecastList from '../ForecastList/ForecastList';
 
+import {
+  getCurrentWeather,
+  getDailyWeather,
+  initialState,
+} from '../../utils/temp-weather.js';
+
 const App = () => {
+  const [lastFetched, setLastFetched] = useState(undefined);
   const [currentWeather, setCurrentWeather] = useState(initialState);
   const [isMetric, setIsMetric] = useState(true); // Metric or Imperial Units
   const [searchedCity, setSearchedCity] = useState('Oslo');
@@ -35,6 +42,7 @@ const App = () => {
         // Get daily forecast after the current weather with location coordinates is fetched
         getDailyWeather(response).then((response) => {
           setForecast(response);
+          setLastFetched(new Date());
           setIsLoading(false);
         });
       } else {
@@ -51,11 +59,18 @@ const App = () => {
     setSearchedCity(term);
   };
 
+  const handleRefresh = () => {
+    handleSubmit(searchedCity);
+    console.log(searchedCity);
+  };
+
   return (
     <div className='main-container'>
       <SearchBar onSubmit={handleSubmit} />
       <Display
+        onRefresh={handleRefresh}
         currentWeather={currentWeather}
+        lastFetched={lastFetched}
         isMetric={isMetric}
         onClick={handleIsMetric}
         isLoading={isLoading}
