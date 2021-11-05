@@ -66,7 +66,7 @@ const Display = ({
           {isLoading ? (
             <p style={{ fontSize: '2rem' }}>Fetching weather...</p>
           ) : (
-            <h2>
+            <h2 className='location-names'>
               {name}, {country}
             </h2>
           )}
