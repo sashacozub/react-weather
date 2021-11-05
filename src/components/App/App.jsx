@@ -1,19 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-// import {
-//   getCurrentWeather,
-//   getDailyWeather,
-//   initialState,
-// } from '../../utils/Weather.js';
-import Display from '../Display/Display';
-import SearchBar from '../SearchBar/SearchBar';
-import ForecastList from '../ForecastList/ForecastList';
-
 import {
   getCurrentWeather,
   getDailyWeather,
   initialState,
-} from '../../utils/temp-weather.js';
+} from '../../utils/Weather.js';
+import Display from '../Display/Display';
+import SearchBar from '../SearchBar/SearchBar';
+import ForecastList from '../ForecastList/ForecastList';
 
 const App = () => {
   const [lastFetched, setLastFetched] = useState(undefined);
