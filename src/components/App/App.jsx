@@ -68,7 +68,11 @@ const App = () => {
         isLoading={isLoading}
         isError={isError}
       />
-      <ForecastList forecast={forecast} isMetric={isMetric} />
+      <ForecastList
+        forecast={forecast}
+        isMetric={isMetric}
+        isLoading={isLoading}
+      />
     </div>
   );
 };
